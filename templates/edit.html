@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在庫管理アプリ</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>📦 商品編集</h1>
+
+  <form action="/edit/{{ index }}" method="POST" class="register-form">
+
+    <label>商品名</label><br>
+    <input type="text" name="name" value="{{ item[0] }}"><br><br>
+
+    <label>カテゴリ</label>
+    <select name="category">
+      <option value="食品" {%if item[1] == "食品" %}selected{% endif %}>食品</option>
+      <option value="飲み物" {%if item[1] == "飲み物" %}selected{% endif %}>飲み物</option>
+      <option value="日用品" {% if item[1] == "日用品" %}selected{% endif %}>日用品</option>
+      <option value="雑貨" {%if item[1] == "雑貨" %}selected{% endif %}>雑貨</option>
+    </select><br><br>
+
+    <label>在庫数</label>
+    <input type="number" name="stock" value="{{ item[2] }}"><br><br>
+
+    <label>価格</label>
+    <input type="number" name="price" value="{{ item[3] }}"><br><br>
+
+    <button type="submit" class="add-button">更新</button>
+  </form>
+
+  
+</body>
+</html>

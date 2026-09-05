@@ -1,0 +1,147 @@
+body {
+  font-family: sans-serif;
+  background-color: #f7f3f5;
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  color: #b56b83;
+}
+
+.item-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 16px auto;
+  width: 320px;
+  background-color: #fffdfd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.item-card h3 {
+  color: #d66b8a;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.item-card p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.out-of-stock {
+  background-color: #ffe5e5;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.low-stock {
+  color: #b85c6f;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 12px auto 16px;
+  background-color: #fff;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 340px;
+}
+
+.clear-search {
+  display: inline-block;
+  margin-top: 4px;
+  text-align: center;
+  background-color: #f3f3f3;
+  color: #666;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.search-button {
+  border-radius: 6px;
+  background-color: #f7b6c8;
+  color: #8a3b50;
+  line-height: 1.5;
+  border: none;
+  
+}
+
+.edit-button {
+  background-color: #d8eef7;
+  color: #4a607a;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin-right: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button {
+  background-color: #fbe5e7;
+  color: #8a4a52;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+
+.add-button {
+  background-color: #f7b6c8;
+  color: #8a3b50;
+  border-radius: 6px;
+  padding: 5px 12px;
+  border: none;
+  margin: 8px;
+}
+
+.form-input,
+.form-select {
+  width: 220px;
+  height: 20px;
+}
+
+.form-label {
+  display: inline-block;
+  width: 80px;
+}
+
+.register-form {
+  background-color: #fff5f7;
+  padding: 20px;
+  border-radius: 12px;
+  width: 320px;
+  margin: 16px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.register-form h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.section-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.item-list-title {
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
