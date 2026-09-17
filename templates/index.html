@@ -51,20 +51,20 @@
   <div class="item-list">
     {% for item in items %}
       <div class="item-card">
-        <h3>{{ loop.index0 }} 商品名：{{ item[0] }}</h3>
-        <p>カテゴリ：{{ item[1] }}</p>
-        <p>在庫：{{ item[2] }}</p>
+        <h3>商品名：{{ item[1] }}</h3>
+        <p>カテゴリ：{{ item[2] }}</p>
+        <p>在庫：{{ item[3] }}</p>
 
-        {% if item[2] | int == 0 %}
+        {% if item[3] | int == 0 %}
             <p class="out-of-stock">🚫在庫切れ</p>
 
-        {% elif item[2] | int <= 5 %}
+        {% elif item[3] | int <= 5 %}
             <p class="low-stock">⚠️残りわずか</p>
         {% endif %}
 
-        <p>価格：{{ item[3] }}</p>
-        <a href="/edit/{{ loop.index0 }}" class="edit-button">編集</a>
-        <a href="/delete/{{ loop.index0 }}" class="delete-button">削除</a>
+        <p>価格：{{ item[4] }}</p>
+        <a href="/edit/{{ item[0] }}" class="edit-button">編集</a>
+        <a href="/delete/{{ item[0] }}" class="delete-button">削除</a>
         
       </div>
     {% endfor %}

@@ -1,3 +1,5 @@
+import sqlite3
+
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -12,14 +14,26 @@ def index():
         stock = request.form.get("stock")
         price = request.form.get("price")
 
+        conn = sqlite3.connect("items.db")
+        cursor = conn.cursor()
 
-        with open("items.txt", "a", encoding="utf-8") as f:
-            f.write(f"{name},{category},{stock},{price}\n")
+        cursor.execute(
+            "INSERT INTO items (name, category, stock, price) VALUES (?, ?, ?, ?)",
+            (name, category, stock, price)
+        )
+
+        conn.commit()
+        conn.close()
 
         return redirect(url_for("index"))
 
-    with open("items.txt", "r", encoding="utf-8") as f:
-        items = f.readlines()
+    conn = sqlite3.connect("items.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT id, name, category, stock, price FROM items")
+    items = cursor.fetchall()
+
+    conn.close()
 
     search = request.args.get("search", "")
     category = request.args.get("category", "")
@@ -28,7 +42,7 @@ def index():
         filtered_items = []
 
         for item in items:
-            if search in item:
+            if search in item[1]:
                 filtered_items.append(item)
 
         items = filtered_items
@@ -37,32 +51,26 @@ def index():
         filtered_items = []
 
         for item in items:
-            data = item.split(",")
-
-            if data[1] == category:
+            if item[2] == category:
                 filtered_items.append(item)
 
         items = filtered_items
 
-    new_items = []
-
-    for item in items:
-        data = item.split(",")
-        new_items.append(data)
-
-
-    return render_template("index.html", items=new_items, search=search, category=category)
+    return render_template("index.html", items=items, search=search, category=category)
 
 @app.route("/delete/<int:index>")
 def delete(index):
 
-    with open("items.txt", "r", encoding="utf-8") as f:
-        lines = f.readlines()
+    conn = sqlite3.connect("items.db")
+    cursor = conn.cursor()
 
-    del lines[index]
+    cursor.execute(
+        "DELETE FROM items WHERE id = ?",
+        (index,)
+    )
 
-    with open("items.txt", "w", encoding="utf-8") as f:
-        f.writelines(lines)
+    conn.commit()
+    conn.close()
 
     return redirect(url_for("index"))
 
@@ -77,20 +85,33 @@ def edit(index):
         stock = request.form.get("stock")
         price = request.form.get("price")
 
-        with open("items.txt", "r", encoding="utf-8") as f:
-            lines = f.readlines()
+        conn = sqlite3.connect("items.db")
+        cursor = conn.cursor()
 
-        lines[index] = f"{name},{category},{stock},{price}\n"
-
-        with open("items.txt", "w", encoding="utf-8") as f:
-            f.writelines(lines)
+        cursor.execute(
+            """
+            UPDATE items
+            SET name = ?, category = ?, stock = ?, price = ?
+            WHERE id = ?
+            """,
+            (name, category, stock, price, index) 
+        )
+        
+        conn.commit()
+        conn.close()
 
         return redirect(url_for("index"))
 
-    with open("items.txt", "r", encoding="utf-8") as f:
-        lines = f.readlines()
+    conn = sqlite3.connect("items.db")
+    cursor = conn.cursor()
 
-    item = lines[index].strip().split(",")
+    cursor.execute(
+        "SELECT name, category, stock, price FROM items WHERE id =?",
+        (index,)
+    )
+    item = cursor.fetchone()
+
+    conn.close()
 
     return render_template("edit.html", item=item, index=index)
 
