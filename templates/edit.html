@@ -27,6 +27,10 @@
     <label>価格</label>
     <input type="number" name="price" value="{{ item[3] }}" class="form-input">
 
+    {% if error %}
+      <p class="error-message">{{ error }}</p>
+    {% endif %}
+
     <button type="submit" class="add-button">更新</button>
   </form>
 
