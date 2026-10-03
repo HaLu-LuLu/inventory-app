@@ -154,3 +154,14 @@ h1 {
   margin: 2px 0;
   font-size: 14px;
 }
+
+.success-message {
+  color: #4f7a5a;
+  background-color: #eef8f0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 10px auto;
+  width: 320px;
+  text-align: center;
+  font-size: 14px;
+}

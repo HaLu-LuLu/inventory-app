@@ -1,8 +1,9 @@
 import sqlite3
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
+app.secret_key = "inventory-secret"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -47,6 +48,8 @@ def index():
 
             conn.commit()
             conn.close()
+
+            flash("商品を登録しました")
 
             return redirect(url_for("index"))
 
@@ -95,6 +98,8 @@ def delete(index):
     conn.commit()
     conn.close()
 
+    flash("商品を削除しました")
+
     return redirect(url_for("index"))
 
 
@@ -141,6 +146,8 @@ def edit(index):
             
             conn.commit()
             conn.close()
+
+            flash("商品を更新しました")
 
             return redirect(url_for("index"))
         

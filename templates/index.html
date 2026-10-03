@@ -8,6 +8,14 @@
 </head>
 <body>
   <h1>📦 在庫管理アプリ</h1>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p class="success-message">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
   
   <form action="/" method="POST" class="register-form">
     <h2>新規登録</h2>
@@ -68,7 +76,7 @@
 
         <p>価格：{{ item[4] }}</p>
         <a href="/edit/{{ item[0] }}" class="edit-button">編集</a>
-        <a href="/delete/{{ item[0] }}" class="delete-button">削除</a>
+        <a href="/delete/{{ item[0] }}" class="delete-button" onclick="return confirm('本当に削除しますか？');">削除</a>
         
       </div>
     {% endfor %}
